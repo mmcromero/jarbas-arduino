@@ -1,14 +1,14 @@
-const char jarbasVersion = " Jarbas-INREBRA-2018-V3";
+String jarbasVersion = "Jarbas-INREBRA-2018-V3";
 
 /* ------------------------------------------------------------------ ETHERNET ------------------------------------------------------------------ */
 //ethernet
 #include <Ethernet.h>
-EthernetServer server(8080); // Cria o servidor na porta 8080
+EthernetServer server(8087); // Cria o servidor na porta 8080
 
 byte myMac[]={0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};  //Mac PRODUÇÃO
-byte myIp[]  = { 192, 168, 15, 46 };   //define IP da central automação 1
+byte myIp[]  = { 192, 168, 0, 7 };   //define IP da central automação 1
 
-byte gateway[] = { 192,168,15, 1 }; // ip do roteador
+byte gateway[] = { 192,168,0, 1 }; // ip do roteador
 byte subnet[] = { 255, 255, 255, 0 };
 /* ------------------------------------------------------------------ ETHERNET ------------------------------------------------------------------ */
 
@@ -73,6 +73,7 @@ void setup(){
   Ethernet.begin(myMac, myIp, gateway, subnet);//inicializa eternet
   irrecv.enableIRIn(); // Inicializa o receptor IR 
   Serial.println(jarbasVersion);
+  Serial.println("teste");
 }
 
 void loop(){
@@ -159,6 +160,9 @@ void loop(){
   client.println("Access-Control-Allow-Origin: *");
   client.println(""); //  do not forget this one
   //continua....
+  //client.println("arduino - conectado!"); //  do not forget this one
+  //client.println(jarbasVersion); //  do not forget this one
+  client.print(montaString());
 
   delay(1);
   client.stop();
@@ -171,4 +175,24 @@ void loop(){
   
   
 }// FIM DO LOOP  
+
+
+
+String montaString()
+{
+    String string1 ="";
+    string1.concat("dados({");
+   //tomadaSala
+    string1.concat("Status : '"); // valor / estado
+    string1.concat("OnLine");
+    //tomadaArthur
+    string1.concat("', Versao : '"); // valor / estado
+    string1.concat(jarbasVersion);
+    //tomadaCasal
+    //string1.concat("', IP : '"); // valor / estado
+    //string1.concat(myIp[]);
+    string1.concat("'})");
+    return string1;
+
+}
 

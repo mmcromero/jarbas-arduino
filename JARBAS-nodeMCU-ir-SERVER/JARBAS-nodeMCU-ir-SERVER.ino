@@ -1,4 +1,4 @@
-#include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
+ #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
 
 //needed for library
 #include <DNSServer.h>
@@ -17,7 +17,7 @@ void handleRoot() {
 }
 
 
-int NEGATIVOIRESCADA = 4 ; //D2
+int NEGATIVOIRESCADA; // = 4 ; //D2
 int NEGATIVOIRCRIANCAS = 2; //D4
 int NEGATIVOIRMEIO = 14; //D5
 int NEGATIVOIRCASAL = 5; //D1
@@ -113,7 +113,7 @@ void setup() {
 
     
     //start-block2
-    IPAddress _ip = IPAddress(192, 168, 0, 88);
+    IPAddress _ip = IPAddress(192, 168, 0, 8);
     IPAddress _gw = IPAddress(192, 168, 0, 1);
     IPAddress _sn = IPAddress(255, 255, 255, 0);
     //end-block2
